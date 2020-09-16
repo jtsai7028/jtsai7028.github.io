@@ -117,8 +117,4 @@ describe('Lab 4', () => {
       cy.contains('hello world', { matchCase: false });
     });
   });
-
-  it('Should link to the lab CSS file and be styled appropriately', () => {
-    cy.get('body');
-  });
 });
