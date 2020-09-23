@@ -1,10 +1,4 @@
-/* .flex-outer li, .flex-inner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center
-}
-
-.flex-outer li button {
+/* .flex-outer li button {
   margin-left: auto;
   padding: 8px 16px;
   border: none;
@@ -26,6 +20,7 @@
   align-items: center;
 }
 
-/* .flex-inner {
-
-} */
+.flex-outer {
+  max-width: 800px;
+  padding: 0px 16px
+}
