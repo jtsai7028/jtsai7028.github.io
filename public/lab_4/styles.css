@@ -1,4 +1,4 @@
-.flex-outer li, .flex-inner {
+/* .flex-outer li, .flex-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center
@@ -18,4 +18,14 @@
 .flex-inner li {
   width: 100px;
   justify-content: space-between;
+} */
+
+.flex-outer li, .flex-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
+
+/* .flex-inner {
+
+} */
