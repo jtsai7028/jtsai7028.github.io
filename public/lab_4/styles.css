@@ -17,3 +17,10 @@
 .flex-outer > li > label + *, .flex-inner {
   flex: 1 0 225px;
 }
+
+.flex-outer > li > button {
+  padding: 6px 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  border-radius: 3px;
+}
