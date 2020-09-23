@@ -1,3 +1,7 @@
+body {
+  background-color: rgba(16, 59, 100, 12);
+}
+
 .flex-outer li, .flex-inner li, .flex-inner {
   display: flex;
   flex-wrap: wrap;
