@@ -1,7 +1,9 @@
-.flex-outer li, .flex-inner {
+.flex-outer li, .flex-inner li, .flex-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: space-between;
+  width: 80px;
 }
 
 .flex-outer {
