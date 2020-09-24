@@ -6,17 +6,17 @@ h1 {
   text-align: center;
 }
 
+.flex-outer {
+  max-width: 800px;
+  padding: 0px 16px;
+}
+
 .flex-outer li, .flex-inner li, .flex-inner {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   width: 80px;
-}
-
-.flex-outer {
-  max-width: 800px;
-  padding: 0px 16px;
 }
 
 .flex-outer > li > label, li p {
