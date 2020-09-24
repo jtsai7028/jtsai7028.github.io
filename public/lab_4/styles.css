@@ -1,5 +1,9 @@
 body {
-  background-color: rgba(16, 59, 100, 12);
+  background-color: rgba(15, 100, 80, 100);
+}
+
+h1 {
+  text-align: center;
 }
 
 .flex-outer li, .flex-inner li, .flex-inner {
