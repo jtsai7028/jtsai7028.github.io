@@ -1,0 +1,42 @@
+body {
+  font: normal 18px/1.5 "arial", "Helvetica Neue", sans-serif;
+  background: #5be387;
+  color: black;
+}
+.header {
+  color: #e6355e;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 15px;
+}
+
+.header-img {
+  display: flex;
+  width: 28%;
+}
+.wrapper {
+  font: normal 18px/1.5 "arial", "Helvetica Neue", sans-serif;
+  background: #29b4e6;
+  color: black;
+  padding: 0 0;
+}
+.left-side {
+  display: flex;
+  flex-wrap: wrap;
+}
+.left-side-para {
+  background-color: lightgrey;
+  margin: 5%;
+  padding: 5px;
+}
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.about-side{
+    background-color: lightgrey;
+    margin: 2%;
+    padding: 5px;
+}
