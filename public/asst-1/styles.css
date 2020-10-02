@@ -102,7 +102,6 @@ body {
 }
 .container {
   font-family: 'Architects Daughter', cursive;
-  font-weight:500;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
