@@ -1,50 +1,54 @@
 /* body {
-  background: #DBAA56;
+background: #DBAA56;
 }
 
 .header {
-  font-family: 'Staatliches', cursive;
-  background-color: #000000;
-  color: #89FC1C;
-  margin-bottom: 15px;
-  padding: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
+font-family: 'Staatliches', cursive;
+background-color: #279AAD;
+color: #F5F2F0;
+margin-top: -15px;
+margin-left: -15px;
+margin-right: -15px;
+margin-bottom: 15px;
+padding: 15px;
+display: flex;
+flex-wrap: wrap;
+align-items: center;
+justify-content: space-between;
 }
 
 .container {
-  font-family: 'Architects Daughter', cursive;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: space-between;
+font-family: 'Architects Daughter', cursive;
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+align-items: flex-start;
+justify-content: space-between;
 }
 
 .content {
-  margin-right: 15px;
+margin-right: 15px;
 }
 
 .body-img {
-  border-radius: 4px;
-  border-width: 1px;
-  border-style: solid;
+border-radius: 4px;
+border-width: 1px;
+border-style: solid;
 }
 
-.backstory {
-  font-weight: bold;
+.sublist1, .sublist2, .sublist3 {
+font-family: 'Yellowtail', cursive;
 }
 
 @media screen and (max-width: 1000px) {
-  .container {
-    justify-content: center;
-  }
+.container {
+justify-content: center;
+}
 
-  .content {
-    flex: 1 0 auto;
-    margin-right: 0px;
-  }
+.content {
+flex: 1 0 auto;
+margin-right: 0px;
+}
 } */
 
 body {
@@ -52,6 +56,8 @@ body {
 }
 
 .header {
+  font-family: 'Staatliches', cursive;
+  font-weight: bold;
   background-color: #279AAD;
   color: #F5F2F0;
   margin-top: -15px;
@@ -95,6 +101,8 @@ body {
   padding: 5px;
 }
 .container {
+  font-family: 'Architects Daughter', cursive;
+  font-weight:500;
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
@@ -111,6 +119,11 @@ body {
   border-width: 1px;
   border-style: solid;
   max-width: 199px;
+}
+
+.sublist1, .sublist2, .sublist3 {
+  font-family: 'Yellowtail', cursive;
+  font-weight: normal;
 }
 
 @media screen and (max-width: 1000px) {
