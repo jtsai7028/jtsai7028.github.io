@@ -1,56 +1,3 @@
-/* body {
-background: #DBAA56;
-}
-
-.header {
-font-family: 'Staatliches', cursive;
-background-color: #279AAD;
-color: #F5F2F0;
-margin-top: -15px;
-margin-left: -15px;
-margin-right: -15px;
-margin-bottom: 15px;
-padding: 15px;
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-justify-content: space-between;
-}
-
-.container {
-font-family: 'Architects Daughter', cursive;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-align-items: flex-start;
-justify-content: space-between;
-}
-
-.content {
-margin-right: 15px;
-}
-
-.body-img {
-border-radius: 4px;
-border-width: 1px;
-border-style: solid;
-}
-
-.sublist1, .sublist2, .sublist3 {
-font-family: 'Yellowtail', cursive;
-}
-
-@media screen and (max-width: 1000px) {
-.container {
-justify-content: center;
-}
-
-.content {
-flex: 1 0 auto;
-margin-right: 0px;
-}
-} */
-
 body {
   background-color: #FAEACD;
 }
@@ -71,35 +18,18 @@ body {
   justify-content: space-between;
 }
 
-.header-img {
-  display: flex;
-  width: 28%;
-}
-
-.content {
-  max-width: 960px;
-  margin-right: 15px;
-  flex: 0 1 auto;
-}
-
-.wrapper {
+/* .wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   flex-direction: horizontal;
+} */
 
-}
-.left-side {
+.wrapper {
   display: flex;
-  margin-right: 15px;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.left-side-para {
-  background-color: #A4D7DB;
-  margin-right: 15px;
-  padding: 5px;
-}
 .container {
   font-family: 'Architects Daughter', cursive;
   display: flex;
@@ -107,10 +37,17 @@ body {
   align-items: flex-start;
   justify-content: space-between;
 }
-.about-side{
-  background-color: #A4D7DB;
-  margin: 2%;
-  padding: 5px;
+
+.content {
+  display: flex;
+  max-width: 960px;
+  margin-right: 15px;
+  flex: 0 1 auto;
+}
+
+.left-side {
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .body-img {
@@ -118,6 +55,18 @@ body {
   border-width: 1px;
   border-style: solid;
   max-width: 199px;
+}
+
+.caption {
+  /* display: flex; */
+  background-color: #A4D7DB;
+  padding: 15px
+}
+
+.right-side {
+  background-color: #A4D7DB;
+  align-self: flex-end;
+  padding: 15px;
 }
 
 .sublist1, .sublist2, .sublist3 {
@@ -133,5 +82,10 @@ body {
   .content {
     flex: 1 0 auto;
     margin-right: 0px;
+    flex-direction: row;
+  }
+
+  .caption {
+    align-content: flex-end;
   }
 }
