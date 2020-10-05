@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.route('/lab_4')
+app.route('/api')
   .get((req, res) => {
     console.log('GET request detected');
     // res.send("Hello World");
