@@ -9,60 +9,69 @@
 </head>
 <body>
   <h1>Jessica Tsai Lab 5</h1>
-  <div class="container">
-    <form method="post">
-      <ul class="flex-outer">
-        <li>
-          <label for="fname">First Name</label>
-          <input type="text" id="fname" name="fname" placeholder="Max 140 chars" maxlength="140">
-        </li>
-        <li>
-          <label for="lname">Last Name</label>
-          <input type="text" id="lname" name="lname" placeholder="Max 140 chars" maxlength="140">
-        </li>
-        <li>
-          <label for="email-address">Email:</label>
-          <input type="email" id="email-address" name="email-address">
-        </li>
-        <li>
-          <label for="phone-number">Phone:</label>
-          <input type="tel" id="phone-number" name="phone-number">
-        </li>
-        <li>
-          <label for="message">Message:</label>
-          <textarea id="message" name="message" rows="5" cols="33" placeholder="Limit to 5 rows and 33 columns"></textarea>
-        </li>
-
-        <li>
-          <p class="checkbox-list-label">Age</p>
-          <ul class="flex-inner">
-            <li>
-              <input type="checkbox" id="eighteen-to-thirty-five" name="eighteen-to-thirty-five">
-              <label for="eighteen-to-thirty-five">18-35</label>
-            </li>
-            <li>
-              <input type="checkbox" id="thirty-five-to-fifty" name="thirty-five-to-fifty">
-              <label for="thirty-five-to-fifty">35-50</label>
-            </li>
-            <li>
-              <input type="checkbox" id="fifty-to-sixty-five" name="fifty-to-sixty-five">
-              <label for="fifty-to-sixty-five">50-65</label>
-            </li>
-          </ul>
-        </li>
-
-        <li>
-          <button type="submit" id="submit button" name="submit button">Submit Form</button>
-        </li>
-        <li>
-          <button type="activate" id="activate button" name="activate button">Activate</button>
-        </li>
-      </ul>
-    </form>
-  </div>
-
   <div class="wrapper">
+    <div class="container">
+      <form method="post">
+        <ul class="flex-outer">
+          <li>
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="fname" placeholder="Max 140 chars" maxlength="140">
+          </li>
+          <li>
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lname" placeholder="Max 140 chars" maxlength="140">
+          </li>
+          <li>
+            <label for="email-address">Email:</label>
+            <input type="email" id="email-address" name="email-address">
+          </li>
+          <li>
+            <label for="phone-number">Phone:</label>
+            <input type="tel" id="phone-number" name="phone-number">
+          </li>
+          <li>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" cols="33" placeholder="Limit to 5 rows and 33 columns"></textarea>
+          </li>
+
+          <li>
+            <p class="checkbox-list-label">Age</p>
+            <ul class="flex-inner">
+              <li>
+                <input type="checkbox" id="eighteen-to-thirty-five" name="eighteen-to-thirty-five">
+                <label for="eighteen-to-thirty-five">18-35</label>
+              </li>
+              <li>
+                <input type="checkbox" id="thirty-five-to-fifty" name="thirty-five-to-fifty">
+                <label for="thirty-five-to-fifty">35-50</label>
+              </li>
+              <li>
+                <input type="checkbox" id="fifty-to-sixty-five" name="fifty-to-sixty-five">
+                <label for="fifty-to-sixty-five">50-65</label>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <button type="submit" id="submit button" name="submit button">Submit Form</button>
+          </li>
+          <li>
+            <button type="activate" id="activate button" name="activate button" onclick="testFunction()">Activate</button>
+          </li>
+        </ul>
+      </form>
+    </div>
   </div>
+
+  <script>
+  function testFunction() {
+    fetch('/api')
+    .then((response) => response.text())
+    .then((response) => {
+      console.log(response);
+    })
+  }
+</script>
 
 </body>
 </html>

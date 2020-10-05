@@ -13,10 +13,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.route('/api')
+app.route('/lab_5')
   .get((req, res) => {
     console.log('GET request detected');
-    // res.send("Hello World");
   })
   .post((req, res) => {
     console.log('POST request detected');
