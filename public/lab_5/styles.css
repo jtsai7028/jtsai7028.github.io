@@ -47,5 +47,13 @@ h1 {
 }
 
 .flex-inner li {
-  width: 80px;
+  width: 95px;
 }
+
+button {
+  margin-right: 10px;
+}
+
+/* .checkbox-list-label {
+
+} */
