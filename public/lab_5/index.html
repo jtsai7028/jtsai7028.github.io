@@ -35,7 +35,7 @@
           </li>
 
           <li>
-            <p class="checkbox-list-label">Age</p>
+            <p class="checkbox-list-label">Age:</p>
             <ul class="flex-inner">
               <li>
                 <input type="checkbox" id="eighteen-to-thirty-five" name="eighteen-to-thirty-five">
@@ -73,6 +73,16 @@
       const tit = document.querySelector("title");
       hel.innerHTML = response;
       tit.innerHTML = response;
+
+      document.querySelector("body").style.backgroundColor = "\#C5A6F4";
+
+      document.querySelector(".checkbox-list-label").innerHTML = "Fruit:";
+      const selects = document.querySelectorAll(".flex-inner li label");
+      const fruit = ["blackberry", "blueberry", "raspberry"];
+      selects.forEach((x, i) => {
+        const rename = x.innerText;
+        x.innerText = fruit[i];
+      })
     })
   }
 </script>
