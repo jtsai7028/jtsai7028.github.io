@@ -54,8 +54,6 @@
 
           <li>
             <button type="submit" id="submit button" name="submit button">Submit Form</button>
-          </li>
-          <li>
             <button type="button" id="activate button" name="activate button" onclick="testFunction()">Activate</button>
           </li>
         </ul>
@@ -75,6 +73,8 @@
       tit.innerHTML = response;
 
       document.querySelector("body").style.backgroundColor = "\#C5A6F4";
+
+      document.querySelector(".flex-outer").style.margin = "0 auto";
 
       document.querySelector(".checkbox-list-label").innerHTML = "Fruits";
       const selects = document.querySelectorAll(".flex-inner li label");

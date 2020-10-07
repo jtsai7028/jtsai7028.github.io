@@ -9,7 +9,6 @@ h1 {
 .flex-outer {
   max-width: 800px;
   padding: 0px 16px;
-  margin: 0 auto;
 }
 
 .flex-outer li {
@@ -54,7 +53,3 @@ h1 {
 button {
   margin-right: 10px;
 }
-
-/* .checkbox-list-label {
-
-} */
