@@ -70,7 +70,9 @@
     .then((response) => {
       console.log(response); //edit this line for the lab
       const hel = document.querySelector(".header");
+      const tit = document.querySelector("title");
       hel.innerHTML = response;
+      tit.innerHTML = response;
     })
   }
 </script>

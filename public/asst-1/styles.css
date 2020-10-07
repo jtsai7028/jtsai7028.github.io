@@ -16,11 +16,13 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  flex-direction: row;
 }
 
 .wrapper {
   display: flex;
   justify-content: center;
+  flex-direction: column;
 }
 
 .container {
@@ -59,6 +61,7 @@ body {
 
 .right-side {
   background-color: #A4D7DB;
+  align-self: flex-end;
   padding: 15px;
 }
 
@@ -81,7 +84,6 @@ body {
   .left-side {
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 15px;
   }
 
   .caption {
