@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.route('/lab_5')
+app.route('/api')
   .get((req, res) => {
     console.log('GET request detected');
-    res.send("Lab 5 for ${process.env.NAME}");
+    res.send(`Lab 5 for ${process.env.NAME}`);
   })
   .post((req, res) => {
     console.log('POST request detected');
