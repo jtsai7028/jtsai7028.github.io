@@ -16,11 +16,12 @@ app.use(express.static('public'));
 app.route('/lab_5')
   .get((req, res) => {
     console.log('GET request detected');
+    res.send("Lab 5 for ${process.env.NAME}");
   })
   .post((req, res) => {
     console.log('POST request detected');
     console.log('Form data in req.body', req.body);
-    // res.send("Hello World");
+    res.send("Hello World");
   });
 
 app.listen(port, () => {
