@@ -1,9 +1,4 @@
 // You may wish to find an effective randomizer function on MDN.
-function getRndInteger(min, max) {//returns a random number between min and max (both included)
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
-
 function range(int) {
   const arr = [];
   for (let i = 0; i < int; i += 1) {
@@ -34,9 +29,10 @@ document.body.addEventListener('submit', async (e) => {
     .then((fromServer) => fromServer.json())
     .then((fromServer) => {
       // You're going to do your lab work in here. Replace this comment.
-
-      for (i of range(10)) {
-        console.log(fromServer[i].name);
+    const checkDup = range(10);
+      for (i of range(10)) {//
+        const randInd = Math.trunc(Math.random() * 100);//how to ensure uniqueness?
+        console.log(randInd + " = " + fromServer[randInd].name);
       }
 
       // let arr10 = range(10).map(x => Math.random() * 10);//multiply by 10 to remove decimal
