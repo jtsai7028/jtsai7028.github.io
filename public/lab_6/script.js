@@ -63,7 +63,8 @@ document.body.addEventListener('submit', async (e) => {
       }
     }
 
-    console.log(listCountry);
+    revListCountry = listCountry.reverse();
+    console.log(revListCountry);
 
     //Tag creation
     // const tag_ol = document.createElement("ol");
