@@ -75,24 +75,31 @@ document.body.addEventListener('submit', async (e) => {
 
     //Tag Creation
     $("form").prepend(document.createElement("ol"));
-    console.log("create OL");
     document.querySelector("ol").className = "flex-inner";
-    console.log("check class");
+    const input_type = document.createAttribute("type");
+    input_type.value = "checkbox";
 
     for (k of revListCountry) {
-      const attribute_type = document.createAttribute("type");
-      attribute_type.value = "checkbox";
-      $("ol").append(document.createElement("li"));
-      $("li").append(document.createElement("input")).
-      append(document.createElement("label").innerHTML = k);
+      //create the components
+      let li_tag = document.createElement("li");
+      let input_tag = document.createElement("input");
+      input_tag.setAttribute("type", "checkbox");
+      let label_tag = document.createElement("label");
+
+      $("ol").append(li_tag);
+      //refer to the newly created tag rather than all of them (which would be indicated by general "" usage)
+      $(li_tag).append(input_tag);
+      $(li_tag).append(label_tag);
+      //add attributes
+      $(input_tag).attr("id", k);
+      $(input_tag).attr("name", k);
+      $(label_tag).attr("for", k);
+      $(label_tag).text(k);
+
       console.log("li " + k);
-      $("input").attr("type", "checkbox");
-      $("input").attr("id", k);
-      $("input").attr("name", k);
-      $("label").attr("for", k);
+
     }
 
-    // console.log('fromServer', fromServer);
   })
   .catch((err) => console.log(err));
 });
