@@ -34,6 +34,13 @@ document.body.addEventListener('submit', async (e) => {
   .then((fromServer) => {
     // You're going to do your lab work in here. Replace this comment.
 
+    //clear previous Selection
+    const exist = document.querySelector("ol");
+    if (exist != null) {
+      exist.parentElement.removeChild(exist);
+      console.log("-----------------------------------------remove children");
+    }
+
     //Random Country Selection
     let listCountry = [];
     for (i of range(10)) {//
@@ -73,33 +80,18 @@ document.body.addEventListener('submit', async (e) => {
     console.log("check class");
 
     for (k of revListCountry) {
-      $("ol").append(document.createElement("li")).
-      append(document.createElement("input")).
+      const attribute_type = document.createAttribute("type");
+      attribute_type.value = "checkbox";
+      $("ol").append(document.createElement("li"));
+      $("li").append(document.createElement("input")).
       append(document.createElement("label").innerHTML = k);
-      document.querySelector("input").type = "checkbox";
       console.log("li " + k);
+      $("input").attr("type", "checkbox");
+      $("input").attr("id", k);
+      $("input").attr("name", k);
+      $("label").attr("for", k);
     }
 
-    // for (x of range(10)) {
-    //   let tag_li = document.createElement("li");
-    //   console.log("li" + x);
-    //   let tag_input = tag_li.appendChild(document.createElement("input"));
-    //   console.log("input" + x);
-    //   tag_input.setAttribute("type", "checkbox");
-    //   tag_input.setAttribute("id", "country" + x);
-    //   tag_input.setAttribute("name", "country" + x);
-    //   let tag_label = tag_li.appendChild(document.createElement("label"));
-    //   console.log("label" + x);
-    //   tag_label.setAttribute("for", "country" + x);
-    //   tag_label.textContent = fromServer[Math.random() * 10]["name"];//fix this to grab from json
-    //   console.log(tag_label.content + " = " + "${fromServer[Math.random()].name}");
-    //   console.log(tag_label.content);
-    // }
-
-
-    // const size = range(10).map(x => Math.random() * 10);//remove decimal by *10
-
-    // console.log('list', list);
     // console.log('fromServer', fromServer);
   })
   .catch((err) => console.log(err));
