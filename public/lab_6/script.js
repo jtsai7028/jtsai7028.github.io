@@ -38,12 +38,12 @@ document.body.addEventListener('submit', async (e) => {
     const exist = document.querySelector("ol");
     if (exist != null) {
       exist.parentElement.removeChild(exist);
-      console.log("-----------------------------------------remove children");
+      console.log("-----------------------------------------remove previous");
     }
 
     //Random Country Selection
     let listCountry = [];
-    for (i of range(10)) {//
+    for (i of range(10)) {
       let randInd1 = randomInt();
       console.log(randInd1 + " = " + fromServer[randInd1].name);
       listCountry.push(fromServer[randInd1].name);
@@ -98,6 +98,22 @@ document.body.addEventListener('submit', async (e) => {
 
       console.log("li " + k);
 
+      //get the country code
+      let code = fromServer.map(c => {
+        if (c.name == k) {
+          return c.code;
+        }
+      });
+      let code_toString = code.toString();//make sure it's a string
+      let count = 0;
+      while (count < code_toString.length) {//clean the ,,,,
+        code_toString = code_toString.replace(/[,]/, " ");
+        count++
+      }
+      let clean = code_toString.trim();
+
+      console.log(k + " is " + clean);
+      $(input_tag).attr("value", clean);
     }
 
   })
