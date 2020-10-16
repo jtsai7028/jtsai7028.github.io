@@ -66,12 +66,19 @@ document.body.addEventListener('submit', async (e) => {
     revListCountry = listCountry.reverse();
     console.log(revListCountry);
 
-    //Tag creation
-    // const tag_ol = document.createElement("ol");
-    // console.log("create OL");
-    // tag_ol.setAttribute("class", "flex-inner");
-    // console.log("create Ol attributes");
+    //Tag Creation
+    $("form").prepend(document.createElement("ol"));
+    console.log("create OL");
+    document.querySelector("ol").className = "flex-inner";
+    console.log("check class");
 
+    for (k of revListCountry) {
+      $("ol").append(document.createElement("li")).
+      append(document.createElement("input")).
+      append(document.createElement("label").innerHTML = k);
+      document.querySelector("input").type = "checkbox";
+      console.log("li " + k);
+    }
 
     // for (x of range(10)) {
     //   let tag_li = document.createElement("li");
