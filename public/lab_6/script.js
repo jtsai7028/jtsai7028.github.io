@@ -119,3 +119,26 @@ document.body.addEventListener('submit', async (e) => {
   })
   .catch((err) => console.log(err));
 });
+
+/*Prof's code:
+if (document.querySelector('.flex-inner')) {
+document.querySelector('.flex-inner').remove();
+}
+const newArr = range(10);
+const newArr2 = newArr.map(() => {
+  const number = getRandomIntInclusive(0, 243);
+  return fromServer[number];
+});
+
+const reverseList = newArr2.sort((a,b) => sortByKey(org, compare, 'name'));
+const ul = document.createElement('ol');
+ol.className = 'flex-inner';
+$('form').prepend(ol);
+
+reverseList.forEach(el, i) => {
+  const li = document.createElement('li');
+  $(li).append('<input type="checkbox" value=$(el.code) id=$(el.code) />');
+  $(li).append('<label for=$(el.code)>$(el.name)</label>');
+  $(ol).append(li);
+}
+*/
