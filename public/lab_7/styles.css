@@ -39,7 +39,7 @@ body {
   max-width: 225px;
   padding: 8px;
 }
- 
+
 .flex-outer > li > label + *,
 .flex-inner {
   flex: 1 0 225px;
@@ -84,10 +84,10 @@ h1 {
   margin: 20px 50px;
   padding: 0 20px;
   min-height: 75px;
-  background-color: darkolivegreen;
+  background-color: #3895a8;
   color: white;
   display: flex;
-  
+
   align-items: center;
   justify-content: center;
   font-weight: bold;
@@ -106,3 +106,6 @@ h1 {
     margin-bottom: 15px;
 }
 
+#chartContainer > button {
+  background-color: #3895a8;
+}
