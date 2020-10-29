@@ -32,7 +32,7 @@ function convertRestaurantsToCategories(restaurantList) {
 
   console.table(reshape);
 
-  // return list;
+  return reshape;
 }
 
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
@@ -121,16 +121,6 @@ document.body.addEventListener('submit', async (e) => {
     body: JSON.stringify(form)
   })
     .then((fromServer) => fromServer.json())
-    //my code
-    /*.then((fromServer) => {
-      const newArr = range(10);
-      const objList = newArr.map((i) => {
-        const number = randomIntInc(0, json.length);
-        return fromServer[number];
-      });
-      console.table(objList);
-    })*/
-    //end my code
     .then((jsonFromServer) => runThisWithResultsFromServer(jsonFromServer))
 
     .catch((err) => {
