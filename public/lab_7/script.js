@@ -16,6 +16,7 @@ function randomIntInc(min, max) {
 function convertRestaurantsToCategories(restaurantList) {
   // process your restaurants here!
   //probably reduce function, convert restaurants to categories
+  console.log("convertRestaurantsToCategories");
   const reshape = restaurantList.reduce((collection, item, i) => {
     const category = collection.find((f) => f.label === item.category);
     if (!category) {
@@ -28,11 +29,15 @@ function convertRestaurantsToCategories(restaurantList) {
     }
     return collection;
   }, []);
+
+  console.table(reshape);
+
   return list;
 }
 
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
   // set your chart configuration here!
+  console.log("makeYourOptionsObject");
   CanvasJS.addColorSet('customColorSet1', [
     // add an array of colors here https://canvasjs.com/docs/charts/chart-options/colorset/
     "#2F4F4F",
@@ -91,6 +96,12 @@ function runThisWithResultsFromServer(jsonFromServer) {
   // Process your restaurants list
   // Make a configuration object for your chart
   // Instantiate your chart
+  const newArr = range(10);
+  const objList = newArr.map((i) => {
+    const number = randomIntInc(0, json.length);
+    return fromServer[number];
+  });
+  console.table(objList);
   const reorganizedData = convertRestaurantsToCategories(jsonFromServer);
   const options = makeYourOptionsObject(reorganizedData);
   const chart = new CanvasJS.Chart('chartContainer', options);
@@ -101,6 +112,7 @@ function runThisWithResultsFromServer(jsonFromServer) {
 document.body.addEventListener('submit', async (e) => {
   e.preventDefault(); // this stops whatever the browser wanted to do itself.
   const form = $(e.target).serializeArray();
+  console.log("eventListener");
   fetch('/api', {
     method: 'POST',
     headers: {
@@ -109,17 +121,18 @@ document.body.addEventListener('submit', async (e) => {
     body: JSON.stringify(form)
   })
     .then((fromServer) => fromServer.json())
-    .then((jsonFromServer) => runThisWithResultsFromServer(jsonFromServer))
     //my code
-    .then((fromServer) => {
+    /*.then((fromServer) => {
       const newArr = range(10);
       const objList = newArr.map((i) => {
         const number = randomIntInc(0, json.length);
         return fromServer[number];
       });
       console.table(objList);
-    })
+    })*/
     //end my code
+    .then((jsonFromServer) => runThisWithResultsFromServer(jsonFromServer))
+
     .catch((err) => {
       console.log(err);
     });
