@@ -32,7 +32,7 @@ function convertRestaurantsToCategories(restaurantList) {
 
   console.table(reshape);
 
-  return list;
+  // return list;
 }
 
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
@@ -60,7 +60,7 @@ function makeYourOptionsObject(datapointsFromRestaurantsList) {
     axisY2: {
       interlacedColor: 'rgba(1,77,101,.2)',
       gridColor: 'rgba(1,77,101,.1)',
-      title: 'Change This Title',
+      title: 'Restaurants by Category',
       labelFontSize: 12,
       scaleBreaks: {customBreaks: [
         {
@@ -98,8 +98,8 @@ function runThisWithResultsFromServer(jsonFromServer) {
   // Instantiate your chart
   const newArr = range(10);
   const objList = newArr.map((i) => {
-    const number = randomIntInc(0, json.length);
-    return fromServer[number];
+    const number = randomIntInc(0, jsonFromServer.length);
+    return jsonFromServer[number];
   });
   console.table(objList);
   const reorganizedData = convertRestaurantsToCategories(jsonFromServer);
