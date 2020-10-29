@@ -51,7 +51,7 @@ function makeYourOptionsObject(datapointsFromRestaurantsList) {
     animationEnabled: true,
     colorSet: 'customColorSet1',
     title: {
-      text: 'Places to Eat Out in the Future'
+      text: 'Places To Eat Out In Future'
     },
     axisX: {
       interval: 1,
@@ -66,17 +66,20 @@ function makeYourOptionsObject(datapointsFromRestaurantsList) {
         {
           type: "zigzag",
           startValue: 40,
-          endValue: 50
+          endValue: 50,
+          color: "blue"
         },
         {
           type: "zigzag",
           startValue: 85,
-           endValue: 100
+          endValue: 100,
+          color: "blue"
         },
         {
           type: "zigzag",
           startValue: 140,
-          endValue: 175
+          endValue: 175,
+          color: "blue"
         }
 
       ]} // Add your scale breaks here https://canvasjs.com/docs/charts/chart-options/axisy/scale-breaks/custom-breaks/
@@ -96,6 +99,10 @@ function runThisWithResultsFromServer(jsonFromServer) {
   // Process your restaurants list
   // Make a configuration object for your chart
   // Instantiate your chart
+  if (document.querySelector(".created-element")) {//remove prev
+    document.querySelector(".created-element").remove();
+  }
+
   const newArr = range(10);
   const objList = newArr.map((i) => {
     const number = randomIntInc(0, jsonFromServer.length);
@@ -106,6 +113,11 @@ function runThisWithResultsFromServer(jsonFromServer) {
   const options = makeYourOptionsObject(reorganizedData);
   const chart = new CanvasJS.Chart('chartContainer', options);
   chart.render();
+
+  const newH = document.createElement("h1");
+  $("form").append(newH);
+  newH.className = "created-element";
+  $(newH).append("Restaurant Categories: " + reorganizedData.length);
 }
 
 // Leave lines 52-67 alone; do your work in the functions above
