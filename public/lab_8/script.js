@@ -13,28 +13,6 @@ function randomIntInc(min, max) {
 
 //End My Section
 
-function convertRestaurantsToCategories(restaurantList) {
-  // process your restaurants here!
-  //probably reduce function, convert restaurants to categories
-  console.log("convertRestaurantsToCategories");
-  const reshape = restaurantList.reduce((collection, item, i) => {
-    const category = collection.find((f) => f.label === item.category);
-    if (!category) {
-      collection.push({
-        label: item.category,
-        y: 1
-      });
-    } else {
-      category.y += 1;
-    }
-    return collection;
-  }, []);
-
-  console.table(reshape);
-
-  return reshape;
-}
-
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
   // set your chart configuration here!
   console.log("makeYourOptionsObject");
@@ -109,7 +87,7 @@ function runThisWithResultsFromServer(jsonFromServer) {
     return jsonFromServer[number];
   });
   console.table(objList);
-  const reorganizedData = convertRestaurantsToCategories(jsonFromServer);
+  const reorganizedData = jsonFromServer;
   const options = makeYourOptionsObject(reorganizedData);
   const chart = new CanvasJS.Chart('chartContainer', options);
   chart.render();
@@ -125,7 +103,7 @@ document.body.addEventListener('submit', async (e) => {
   e.preventDefault(); // this stops whatever the browser wanted to do itself.
   const form = $(e.target).serializeArray();
   console.log("eventListener");
-  fetch('/api', {
+  fetch('/sql', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
