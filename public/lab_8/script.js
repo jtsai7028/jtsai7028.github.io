@@ -12,6 +12,27 @@ function randomIntInc(min, max) {
 }
 
 //End My Section
+function convertRestaurantsToCategories(restaurantList) {
+  // process your restaurants here!
+  //probably reduce function, convert restaurants to categories
+  console.log("convertRestaurantsToCategories");
+  const reshape = restaurantList.reduce((collection, item, i) => {
+    const category = collection.find((f) => f.label === item.category);
+    if (!category) {
+      collection.push({
+        label: item.category,
+        y: 1
+      });
+    } else {
+      category.y += 1;
+    }
+    return collection;
+  }, []);
+
+  console.table(reshape);
+
+  return reshape;
+}
 
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
   // set your chart configuration here!

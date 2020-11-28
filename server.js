@@ -5,6 +5,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 // import countries from './public/lab_6/countries.js'
 import fetch from 'node-fetch'; //lab7
+import { open } from "sqlite";//lab8
 import sqlite3 from "sqlite3";//lab8
 
 dotenv.config();
@@ -23,22 +24,22 @@ app.use((req, res, next) => {
 });
 
 app.route('/api')
-  .get(async (req, res) => {
-    console.log('GET request detected');
-    // res.send(`Lab 5 for ${process.env.NAME}`);
-    /*const data = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"); //lab7
-    const dataj = await data.json();*/
-    // console.log("fetch request data", dataj);//lab7
-  })
-  .post(async (req, res) => { //make async for lab7
-    console.log('POST request detected');
-    console.log('Form data in req.body', req.body);
-    const data = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"); //lab7
-    const dataj = await data.json(); //lab7
-    res.json(dataj); //lab7
-    // res.send("Hello World");//lab_4
-    // res.json(countries); //lab6
-  });
+.get(async (req, res) => {
+  console.log('GET request detected');
+  // res.send(`Lab 5 for ${process.env.NAME}`);
+  /*const data = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"); //lab7
+  const dataj = await data.json();*/
+  // console.log("fetch request data", dataj);//lab7
+})
+.post(async (req, res) => { //make async for lab7
+  console.log('POST request detected');
+  console.log('Form data in req.body', req.body);
+  const data = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json"); //lab7
+  const dataj = await data.json(); //lab7
+  res.json(dataj); //lab7
+  // res.send("Hello World");//lab_4
+  // res.json(countries); //lab6
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
@@ -50,33 +51,46 @@ const DB_settings = {
   driver: sqlite3.Database,
 };
 
-const DB_path = DB_settings.filename;
-
-function databaseInitialize() {
-  const DB = new sqlite3.Database(DB_path, function(err) {//open database
-    if (err) {
-      return console.log(err);
-    }
-    console.log("Connected to " + DB_path + " database.");
-  });
-
-  const schema = "CREATE TABLE IF NOT EXISTS food";
-  schema.concat("(name text,");
-  schema.concat("category text,");
-  schema.concat("inspection_date date,");
-  schema.concat("inspection_results text,");
-  schema.concat("city text,");
-  schema.concat("state text,");
-  schema.concat("zip integer,");
-  schema.concat("owner text,");
-  schema.concat("type text);");
-  console.log("schema created");
-  return DB;
+function initSchema() {
+  let schema = "CREATE TABLE IF NOT EXISTS food ";
+  schema += "(name TEXT, ";
+  schema += "category TEXT, ";
+  schema += "inspection_date DATE, ";
+  schema += "inspection_results TEXT, ";
+  schema += "city TEXT, ";
+  schema += "state TEXT, ";
+  schema += "zip INTEGER, ";
+  schema += "owner TEXT, ";
+  schema += "type TEXT);";
+  console.log(schema);
+  return schema;
 }
 
-function databaseClose(datab) {
-  const schema = "DROP TABLE IF EXISTS food";
-  console.log("Drop table");
+async function databaseInitialize(dbSettings) {
+  try {
+    const DB = await open(dbSettings);
+    const dropit = "DROP TABLE IF EXISTS food";
+    await DB.exec(dropit);
+    console.log("Drop table");
+
+    await DB.exec(initSchema());
+    console.log("Schema created");
+
+    const data = await foodDataFetcher();
+    console.log("foodDataFetcher complete");
+
+    data.forEach((entry) => { dataInput(entry, DB) });
+
+    const test = await DB.get("SELECT * FROM food")
+    console.log(test);
+  }
+  catch(e) {
+    console.log("Error loading Database");
+    console.log(e);
+  }
+}
+
+async function databaseClose(datab) {
   datab.close((errr) => {
     if (errr) {
       return console.log("Close failure");
@@ -85,47 +99,40 @@ function databaseClose(datab) {
   });
 }
 
-async function foodDataFetcher(database) {
-  await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json")
-  .then((fromFetch) => fromFetch.json())
-  .then((fromFetch) => dataInput(JSON.stringify(fromFetch), database))
-  .catch((err) => {
-    console.log(err);
-  });
-  console.log("foodDataFetcher complete");
+async function foodDataFetcher() {
+  const info = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json")
+  return info.json();
 }
 
-function dataInput(jsonQ, db) {//fix how data is put into sql
-  db.serialize(() => {
-    db.exec("INSERT INTO food VALUES" + jsonQ);
-  });
-  console.log("dataInput complete");
+async function dataInput(item, database) {
+  try {
+    let restaurant_name = item.name;
+    let category = item.category;
+
+    await database.exec(`INSERT INTO food (name, category) VALUES ("${restaurant_name}", "${category}")`);
+    console.log(`${restaurant_name} and ${category} inserted`);
+  }
+  catch(e) {
+    console.log('Error on insertion');
+    console.log(e);
+  }
 }
 
-function databaseRetriever(dbase) {
-  const q_name = "SELECT COUNT(name) FROM food";
-  const q_cat = "SELECT COUNT(category) FROM food";
-  dbase.serialize(() => {
-    dbase.exec(q_name);
-    console.log("q_name");
-    dbase.exec(q_cat);
-    console.log("q_cat");
-  });
+async function databaseRetriever(dbase) {
+  const qcontent = await dbase.all("SELECT category, COUNT(restaurant_name) FROM restaurants GROUP BY category;")
   console.log("databaseRetriever complete");
+  return qcontent;
 }
-
-const ddbb = databaseInitialize();
-console.log("database created");
-foodDataFetcher(ddbb);
-console.log("enter foodDataFetcher");
 
 app.route("/sql")
-  .get((req, res) => {
-    console.log('/sql GET request detected');
-  })
-  .post(async (req, res) => {
-    console.log('/sql POST request detected');
-    console.log('/sql Form data in req.body', req.body);
-    await databaseRetriever(ddbb);
-    // databaseClose(ddbb);
-  });
+.get((req, res) => {
+  console.log('/sql GET request detected');
+})
+.post(async (req, res) => {
+  console.log('/sql POST request detected');
+  console.log('/sql Form data in req.body', req.body);
+  const ddbb = databaseInitialize(DB_settings);
+  const output = databaseRetriever(ddbb);
+  res.json(output);
+  databaseClose(ddbb);
+});
