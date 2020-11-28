@@ -48,20 +48,14 @@ app.listen(port, () => {
 //lab8
 const DB_settings = {
   filename: "./public/lab_8/tmp/database.db",
-  driver: sqlite3.Database,
+  driver: sqlite3.Database
 };
 
 function initSchema() {
   let schema = "CREATE TABLE IF NOT EXISTS food ";
-  schema += "(name TEXT, ";
-  schema += "category TEXT, ";
-  schema += "inspection_date DATE, ";
-  schema += "inspection_results TEXT, ";
-  schema += "city TEXT, ";
-  schema += "state TEXT, ";
-  schema += "zip INTEGER, ";
-  schema += "owner TEXT, ";
-  schema += "type TEXT);";
+  schema += "(id INTEGER PRIMARY KEY AUTOINCREMENT, ";
+  schema += "name TEXT, ";
+  schema += "category TEXT);";
   console.log(schema);
   return schema;
 }
@@ -69,7 +63,7 @@ function initSchema() {
 async function databaseInitialize(dbSettings) {
   try {
     const DB = await open(dbSettings);
-    const dropit = "DROP TABLE IF EXISTS food";
+    const dropit = "DROP TABLE IF EXISTS food;";
     await DB.exec(dropit);
     console.log("Drop table");
 
@@ -80,9 +74,11 @@ async function databaseInitialize(dbSettings) {
     console.log("foodDataFetcher complete");
 
     data.forEach((entry) => { dataInput(entry, DB) });
+    console.log("dataInput complete");
 
-    const test = await DB.get("SELECT * FROM food")
-    console.log(test);
+    // const test = await DB.get("SELECT category, COUNT(name) FROM food GROUP BY category;")
+    // const test = await DB.get("SELECT * FROM food")
+    // console.log(test);
   }
   catch(e) {
     console.log("Error loading Database");
@@ -110,7 +106,7 @@ async function dataInput(item, database) {
     let category = item.category;
 
     await database.exec(`INSERT INTO food (name, category) VALUES ("${restaurant_name}", "${category}")`);
-    console.log(`${restaurant_name} and ${category} inserted`);
+    // console.log(`${restaurant_name} and ${category} inserted`);
   }
   catch(e) {
     console.log('Error on insertion');
@@ -119,10 +115,12 @@ async function dataInput(item, database) {
 }
 
 async function databaseRetriever(dbase) {
-  const qcontent = await dbase.all("SELECT category, COUNT(restaurant_name) FROM restaurants GROUP BY category;")
+  const qcontent = await dbase.all('SELECT category, COUNT(name) FROM food GROUP BY category;');
   console.log("databaseRetriever complete");
   return qcontent;
 }
+
+const ddbb = databaseInitialize(DB_settings);
 
 app.route("/sql")
 .get((req, res) => {
@@ -134,5 +132,5 @@ app.route("/sql")
   const ddbb = databaseInitialize(DB_settings);
   const output = databaseRetriever(ddbb);
   res.json(output);
-  databaseClose(ddbb);
+  // databaseClose(ddbb);
 });

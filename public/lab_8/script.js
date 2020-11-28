@@ -12,10 +12,7 @@ function randomIntInc(min, max) {
 }
 
 //End My Section
-function convertRestaurantsToCategories(restaurantList) {
-  // process your restaurants here!
-  //probably reduce function, convert restaurants to categories
-  console.log("convertRestaurantsToCategories");
+function selectRestaurants(restaurantList) {
   const reshape = restaurantList.reduce((collection, item, i) => {
     const category = collection.find((f) => f.label === item.category);
     if (!category) {
@@ -107,9 +104,12 @@ function runThisWithResultsFromServer(jsonFromServer) {
     const number = randomIntInc(0, jsonFromServer.length);
     return jsonFromServer[number];
   });
+  console.log("objList");
   console.table(objList);
-  const reorganizedData = jsonFromServer;
-  const options = makeYourOptionsObject(reorganizedData);
+  console.log("jsonFromServer:");
+  console.table(jsonFromServer);
+  // const reorganizedData = selectRestaurants(jsonFromServer);
+  const options = makeYourOptionsObject(jsonFromServer);
   const chart = new CanvasJS.Chart('chartContainer', options);
   chart.render();
 
