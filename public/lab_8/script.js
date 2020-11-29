@@ -12,25 +12,6 @@ function randomIntInc(min, max) {
 }
 
 //End My Section
-function selectRestaurants(restaurantList) {
-  const reshape = restaurantList.reduce((collection, item, i) => {
-    const category = collection.find((f) => f.label === item.category);
-    if (!category) {
-      collection.push({
-        label: item.category,
-        y: 1
-      });
-    } else {
-      category.y += 1;
-    }
-    return collection;
-  }, []);
-
-  console.table(reshape);
-
-  return reshape;
-}
-
 function makeYourOptionsObject(datapointsFromRestaurantsList) {
   // set your chart configuration here!
   console.log("makeYourOptionsObject");
@@ -108,7 +89,6 @@ function runThisWithResultsFromServer(jsonFromServer) {
   console.table(objList);
   console.log("jsonFromServer:");
   console.table(jsonFromServer);
-  // const reorganizedData = selectRestaurants(jsonFromServer);
   const options = makeYourOptionsObject(jsonFromServer);
   const chart = new CanvasJS.Chart('chartContainer', options);
   chart.render();
@@ -116,7 +96,7 @@ function runThisWithResultsFromServer(jsonFromServer) {
   const newH = document.createElement("h1");
   $("form").append(newH);
   newH.className = "created-element";
-  $(newH).append("Restaurant Categories: " + reorganizedData.length);
+  $(newH).append("Restaurant Categories: " + jsonFromServer.length);
 }
 
 // Leave lines 52-67 alone; do your work in the functions above

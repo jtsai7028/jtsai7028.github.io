@@ -76,24 +76,24 @@ async function databaseInitialize(dbSettings) {
     data.forEach((entry) => { dataInput(entry, DB) });
     console.log("dataInput complete");
 
-    // const test = await DB.get("SELECT category, COUNT(name) FROM food GROUP BY category;")
-    // const test = await DB.get("SELECT * FROM food")
-    // console.log(test);
+    const test = await DB.all("SELECT category, COUNT(name) FROM food GROUP BY category;")
+    // const test = await DB.all("SELECT * FROM food")
+    console.log(test);
+    return DB;
   }
   catch(e) {
-    console.log("Error loading Database");
-    console.log(e);
+    console.log("Error loading Database" + e);
   }
 }
-
-async function databaseClose(datab) {
-  datab.close((errr) => {
-    if (errr) {
-      return console.log("Close failure");
-    }
-    console.log("Successful DB close");
-  });
-}
+//
+// async function databaseClose(datab) {
+//   (await datab).close((errr) => {
+//     if (errr) {
+//       return console.log("Close failure");
+//     }
+//     console.log("Successful DB close");
+//   });
+// }
 
 async function foodDataFetcher() {
   const info = await fetch("https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json")
@@ -107,20 +107,20 @@ async function dataInput(item, database) {
 
     await database.exec(`INSERT INTO food (name, category) VALUES ("${restaurant_name}", "${category}")`);
     // console.log(`${restaurant_name} and ${category} inserted`);
-  }
-  catch(e) {
-    console.log('Error on insertion');
-    console.log(e);
+  } catch (e) {
+    console.log("Error on insertion" + e);
   }
 }
 
 async function databaseRetriever(dbase) {
-  const qcontent = await dbase.all('SELECT category, COUNT(name) FROM food GROUP BY category;');
-  console.log("databaseRetriever complete");
-  return qcontent;
+  try {
+    const qcontent = (await dbase).all("SELECT category, COUNT(name) FROM food GROUP BY category;");
+    console.log("databaseRetriever complete");
+    return qcontent;
+  } catch(e) {
+    console.log("Error on retrieval" + e);
+  }
 }
-
-const ddbb = databaseInitialize(DB_settings);
 
 app.route("/sql")
 .get((req, res) => {
@@ -129,8 +129,8 @@ app.route("/sql")
 .post(async (req, res) => {
   console.log('/sql POST request detected');
   console.log('/sql Form data in req.body', req.body);
-  const ddbb = databaseInitialize(DB_settings);
-  const output = databaseRetriever(ddbb);
+  const ddbb = await databaseInitialize(DB_settings);
+  const output = await databaseRetriever(ddbb);
   res.json(output);
   // databaseClose(ddbb);
 });
